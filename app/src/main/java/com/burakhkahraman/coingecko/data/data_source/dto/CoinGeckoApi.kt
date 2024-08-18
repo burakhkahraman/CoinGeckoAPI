@@ -1,0 +1,16 @@
+package com.burakhkahraman.coingecko.data.data_source.dto
+
+import com.burakhkahraman.coingecko.data.data_source.dto.CoinDetailDTO.CoinDetailDto
+import com.burakhkahraman.coingecko.data.data_source.dto.CoinListDTO.CoinListDtoItem
+import retrofit2.http.GET
+import retrofit2.http.Path
+import retrofit2.http.Query
+
+interface CoinGeckoApi {
+
+    @GET("/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&sparkline=false")
+    suspend fun getAllCoins(@Query("page") page: String): List<CoinListDtoItem>
+
+    @GET("/api/v3/coins/{id}")
+    suspend fun getCoinById(@Path("id") id: String): CoinDetailDto
+}
